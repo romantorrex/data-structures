@@ -9,3 +9,7 @@ gradlew
 gradlew.bat
 settings.gradle
 
+#IDE
+.idea
+stale_outputs_checked
+
