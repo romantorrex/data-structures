@@ -5,24 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/** Implementation of a hash table using chaining for handling collisions */
 public class HashTable {
-  private List<Entry>[] array = new List[10];
+  private List<Entry>[] buckets = new List[10];
   private int count = 0;
 
-  // TODO: Handle case when key already exists
-  public void put(String key, int value) {
-    int hashCode = hash(key);
-    int index = hashCode % array.length;
-
-    List<Entry> list = array[index];
-    if (list == null) {
-      list = new ArrayList();
-      array[index] = list;
-    }
-    Entry entry = find(key, list);
+  public void put(String key, Integer value) {
+    List<Entry> bucket = getBucket(key);
+    Entry entry = find(key, bucket);
 
     if (entry == null) {
-      list.add(new Entry(key, value));
+      bucket.add(new Entry(key, value));
       count++;
     } else {
       entry.setValue(value);
@@ -30,14 +23,7 @@ public class HashTable {
   }
 
   public Integer get(String key) {
-    int hashCode = hash(key);
-    int index = hashCode % array.length;
-
-    List<Entry> bucket = array[index];
-    if (bucket == null) {
-      return null;
-    }
-
+    List<Entry> bucket = getBucket(key);
     Entry entry = find(key, bucket);
 
     if (entry == null) {
@@ -47,19 +33,16 @@ public class HashTable {
     return entry.value;
   }
 
-  private Entry find(String key, List<Entry> list) {
-
-    return list.stream().filter(entry -> entry.getKey().equals(key)).findFirst().orElse(null);
-  }
-
   public int size() {
     return count;
   }
 
+  // TODO: Add implementation for removing a key-value pair.
+
   @Override
   public String toString() {
     String items =
-        Arrays.stream(array)
+        Arrays.stream(buckets)
             .filter(i -> i != null)
             .flatMap(List::stream)
             .map(i -> i.toString())
@@ -68,29 +51,45 @@ public class HashTable {
     return String.format("[%s]", items);
   }
 
+  private List<Entry> getBucket(String key) {
+    int hashCode = hash(key);
+    int index = hashCode % buckets.length;
+
+    if (buckets[index] == null) {
+      buckets[index] = new ArrayList<>();
+    }
+
+    return buckets[index];
+  }
+
   private int hash(String key) {
     return key.length();
   }
-}
 
-class Entry {
-  String key;
-  Integer value;
+  private Entry find(String key, List<Entry> list) {
 
-  Entry(String key, Integer value) {
-    this.key = key;
-    this.value = value;
+    return list.stream().filter(entry -> entry.getKey().equals(key)).findFirst().orElse(null);
   }
 
-  public void setValue(int value) {
-    this.value = value;
-  }
+  private static class Entry {
+    String key;
+    Integer value;
 
-  public String getKey() {
-    return this.key;
-  }
+    Entry(String key, Integer value) {
+      this.key = key;
+      this.value = value;
+    }
 
-  public String toString() {
-    return String.format("{%s:%s}", key, value);
+    public void setValue(int value) {
+      this.value = value;
+    }
+
+    public String getKey() {
+      return this.key;
+    }
+
+    public String toString() {
+      return String.format("{%s:%s}", key, value);
+    }
   }
 }
