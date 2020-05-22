@@ -1,7 +1,5 @@
 package com.iamroman.datastructures;
 
-import java.util.NoSuchElementException;
-
 // TODO: Add methods addLast(), addFirst, removeLast(), removeFirst()
 public class LinkedList {
   private Node first;
@@ -39,10 +37,9 @@ public class LinkedList {
 
   public void delete(String data) {
 
-    if (first != null && data.equals(first.data)) {
+    while (first != null && data.equals(first.data)) {
       first = first.next;
       size--;
-      return;
     }
 
     Node previous = first;
@@ -51,13 +48,11 @@ public class LinkedList {
       if (data.equals(current.data)) {
         previous.next = current.next;
         size--;
-        return;
+      } else {
+        previous = current;
       }
-      previous = current;
       current = current.next;
     }
-
-    throw new NoSuchElementException("Data not found.");
   }
 
   public int size() {

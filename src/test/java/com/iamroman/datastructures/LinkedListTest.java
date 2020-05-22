@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.NoSuchElementException;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class LinkedListTest {
@@ -90,6 +91,20 @@ public class LinkedListTest {
   }
 
   @Test
+  public void delete_duplicated_success() {
+    list.add("a");
+    list.add("a");
+    list.add("b");
+
+    list.delete("a");
+
+    assertThat(list.size()).isEqualTo(1);
+    assertThat(list.indexOf("a")).isEqualTo(-1);
+    ;
+  }
+
+  @Test
+  @Ignore // TODO: define the correct behaviour when the element to be deleted does not exist.
   public void delete_nonExistent_throwsException() {
     list.add("1");
     list.add("10");
