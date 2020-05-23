@@ -16,11 +16,22 @@ public abstract class NodeUtils {
   }
 
   public static Node<String> toListOfNodes(String[] array) {
-    Node<String> first = new Node("first");
+    Node<String> first = new Node<>("first");
 
     Node<String> current = first;
     for (String data : array) {
-      current.next = new Node(data);
+      current.next = new Node<>(data);
+      current = current.next;
+    }
+    return first.next;
+  }
+
+  public static Node<Integer> toListOfNodes(Integer[] array) {
+    Node<Integer> first = new Node<>(0);
+
+    Node<Integer> current = first;
+    for (Integer data : array) {
+      current.next = new Node<>(data);
       current = current.next;
     }
     return first.next;
