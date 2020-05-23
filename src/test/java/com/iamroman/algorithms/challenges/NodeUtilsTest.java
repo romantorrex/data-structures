@@ -15,7 +15,7 @@ public class NodeUtilsTest {
 
   @Test
   public void countNodes_success() {
-    Node node = new Node("a");
+    Node<String> node = new Node("a");
     node.next = new Node("b");
 
     assertThat(NodeUtils.countNodes(node)).isEqualTo(2);
@@ -25,7 +25,7 @@ public class NodeUtilsTest {
   public void toListOfNodes_success() {
     String[] array = {"a", "b", "c"};
 
-    Node nodeList = NodeUtils.toListOfNodes(array);
+    Node<String> nodeList = NodeUtils.toListOfNodes(array);
 
     assertThat(NodeUtils.countNodes(nodeList)).isEqualTo(3);
   }
@@ -34,13 +34,13 @@ public class NodeUtilsTest {
   public void toListOfNodes_emptyArray_returnsNull() {
     String[] array = {};
 
-    Node nodeList = NodeUtils.toListOfNodes(array);
+    Node<String> nodeList = NodeUtils.toListOfNodes(array);
     assertThat(nodeList).isNull();
   }
 
   @Test
   public void toString_success() {
-    Node node = NodeUtils.toListOfNodes(new String[] {"1", "2", "3"});
+    Node<String> node = NodeUtils.toListOfNodes(new String[] {"1", "2", "3"});
     assertThat(NodeUtils.toString(node)).isEqualTo("[1, 2, 3]");
   }
 

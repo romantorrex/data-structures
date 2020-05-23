@@ -4,9 +4,9 @@ import com.iamroman.algorithms.challenges.LinkedListChallenges.Node;
 
 /** Utility methods that are used mostly to test the solutions to LinkedList challenges */
 public abstract class NodeUtils {
-  public static int countNodes(Node first) {
+  public static int countNodes(Node<?> first) {
     int count = 0;
-    Node current = first;
+    var current = first;
     while (current != null) {
       count++;
       current = current.next;
@@ -15,10 +15,10 @@ public abstract class NodeUtils {
     return count;
   }
 
-  public static Node toListOfNodes(String[] array) {
-    Node first = new Node("first");
+  public static Node<String> toListOfNodes(String[] array) {
+    Node<String> first = new Node("first");
 
-    Node current = first;
+    Node<String> current = first;
     for (String data : array) {
       current.next = new Node(data);
       current = current.next;
@@ -26,7 +26,7 @@ public abstract class NodeUtils {
     return first.next;
   }
 
-  public static String toString(Node first) {
+  public static String toString(Node<?> first) {
     StringBuilder builder = new StringBuilder("[");
 
     Node current = first;

@@ -9,7 +9,7 @@ public class LinkedListChallengesTest {
 
   @Test
   public void deleteDuplicates_success() {
-    Node nodeList = NodeUtils.toListOfNodes(new String[] {"a", "b", "c", "b", "d", "a"});
+    Node<String> nodeList = NodeUtils.toListOfNodes(new String[] {"a", "b", "c", "b", "d", "a"});
 
     LinkedListChallenges.deleteDuplicates(nodeList);
 
