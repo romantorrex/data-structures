@@ -16,4 +16,14 @@ public class LinkedListChallengesTest {
     assertThat(NodeUtils.countNodes(nodeList)).isEqualTo(4);
     assertThat(NodeUtils.toString(nodeList)).isEqualTo("[a, b, c, d]");
   }
+
+  @Test
+  public void sumLists_success() {
+    Node<Integer> listA = NodeUtils.toListOfNodes(new Integer[] {2, 8, 3}); // 382 (2 -> 8 -> 3)
+    Node<Integer> listB = NodeUtils.toListOfNodes(new Integer[] {9, 4, 5}); // 549 (0 -> 4 -> 5)
+
+    Node<Integer> listC = LinkedListChallenges.sumLists(listA, listB);
+
+    assertThat(NodeUtils.toString(listC)).isEqualTo("[1, 3, 9]"); // 931 ( 1 -> 3 -> 9)
+  }
 }
