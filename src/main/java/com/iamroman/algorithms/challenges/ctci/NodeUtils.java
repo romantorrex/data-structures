@@ -1,6 +1,6 @@
-package com.iamroman.algorithms.challenges;
+package com.iamroman.algorithms.challenges.ctci;
 
-import com.iamroman.algorithms.challenges.LinkedListChallenges.Node;
+import com.iamroman.algorithms.challenges.ctci.LinkedListChallenges.Node;
 
 /** Utility methods that are used mostly to test the solutions to LinkedList challenges */
 public abstract class NodeUtils {

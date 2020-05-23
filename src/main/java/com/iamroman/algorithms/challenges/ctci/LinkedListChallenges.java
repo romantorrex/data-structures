@@ -1,4 +1,4 @@
-package com.iamroman.algorithms.challenges;
+package com.iamroman.algorithms.challenges.ctci;
 
 public abstract class LinkedListChallenges {
 

@@ -1,8 +1,9 @@
-package com.iamroman.algorithms.challenges;
+package com.iamroman.algorithms.challenges.ctci;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.iamroman.algorithms.challenges.LinkedListChallenges.Node;
+import com.iamroman.algorithms.challenges.ctci.LinkedListChallenges.Node;
+import com.iamroman.algorithms.challenges.ctci.NodeUtils;
 import org.junit.Test;
 
 public class NodeUtilsTest {
