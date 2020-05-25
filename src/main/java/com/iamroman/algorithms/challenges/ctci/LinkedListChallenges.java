@@ -1,5 +1,7 @@
 package com.iamroman.algorithms.challenges.ctci;
 
+import static com.iamroman.algorithms.challenges.ctci.NodeUtils.countNodes;
+
 public abstract class LinkedListChallenges {
 
   /** Solves the interview question 2.1 (Remove Dups) from book "Cracking the Coding Interview" */
@@ -38,6 +40,29 @@ public abstract class LinkedListChallenges {
     }
 
     return listC.next;
+  }
+
+  /** Solves interview question 2.6 (Palindrome). */
+  public static boolean isPalindrome(Node<String> start) {
+    int count = countNodes(start);
+
+    Node<String> a = start;
+    while (count >= 1) {
+      Node<String> b = a;
+      int i = 1;
+      while (i++ < count) {
+        b = b.next;
+      }
+
+      if (!(a.data.equals(b.data))) {
+        return false;
+      }
+
+      a = a.next;
+      count = count - 2;
+    }
+
+    return true;
   }
 
   private static Node<String> deleteData(Node<String> first, String data) {

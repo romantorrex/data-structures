@@ -26,4 +26,16 @@ public class LinkedListChallengesTest {
 
     assertThat(NodeUtils.toString(listC)).isEqualTo("[1, 3, 9]"); // 931 ( 1 -> 3 -> 9)
   }
+
+  @Test
+  public void isPalindrome_success() {
+    Node<String> list1 =
+        NodeUtils.toListOfNodes(new String[] {"a", "l", "o", "m", "o", "m", "o", "l", "a"});
+    Node<String> list2 = NodeUtils.toListOfNodes(new String[] {"a", "b", "b", "a"});
+    Node<String> list3 = NodeUtils.toListOfNodes(new String[] {"h", "o", "l", "a", "a"});
+
+    assertThat(LinkedListChallenges.isPalindrome(list1)).isTrue();
+    assertThat(LinkedListChallenges.isPalindrome(list2)).isTrue();
+    assertThat(LinkedListChallenges.isPalindrome(list3)).isFalse();
+  }
 }
