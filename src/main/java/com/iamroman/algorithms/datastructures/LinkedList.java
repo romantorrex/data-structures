@@ -2,18 +2,18 @@ package com.iamroman.algorithms.datastructures;
 
 // TODO: Add methods addLast(), addFirst, removeLast(), removeFirst()
 public class LinkedList {
-  private Node first;
+  private Node<String> first;
   private int size = 0;
 
   public void add(String data) {
-    Node node = new Node(data);
+    Node<String> node = new Node<>(data);
     size++;
     if (first == null) {
       first = node;
       return;
     }
 
-    Node current = first;
+    Node<String> current = first;
     while (current.next != null) {
       current = current.next;
     }
@@ -23,7 +23,7 @@ public class LinkedList {
 
   public int indexOf(String data) {
     int index = 0;
-    Node current = first;
+    Node<String> current = first;
     while (current != null) {
       if (data.equals(current.data)) {
         return index;
@@ -42,8 +42,8 @@ public class LinkedList {
       size--;
     }
 
-    Node previous = first;
-    Node current = first;
+    Node<String> previous = first;
+    Node<String> current = first;
     while (current != null) {
       if (data.equals(current.data)) {
         previous.next = current.next;
@@ -57,14 +57,5 @@ public class LinkedList {
 
   public int size() {
     return size;
-  }
-}
-
-class Node {
-  String data;
-  Node next;
-
-  Node(String data) {
-    this.data = data;
   }
 }
