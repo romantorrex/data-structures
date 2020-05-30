@@ -1,4 +1,4 @@
-package com.iamroman.datastructures;
+package com.iamroman.algorithms.datastructures;
 
 // TODO: Add methods addLast(), addFirst, removeLast(), removeFirst()
 public class LinkedList {

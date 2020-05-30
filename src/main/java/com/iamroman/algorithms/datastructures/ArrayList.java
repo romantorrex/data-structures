@@ -1,4 +1,4 @@
-package com.iamroman.datastructures;
+package com.iamroman.algorithms.datastructures;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
