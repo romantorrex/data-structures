@@ -1,5 +1,7 @@
 package com.iamroman.algorithms;
 
+import java.util.Arrays;
+
 public abstract class Sorting {
 
   public static void insertionSort(int[] data) {
@@ -30,9 +32,47 @@ public abstract class Sorting {
     }
   }
 
+  // TODO: Implement using the input array to store the sorted values.
+  public static int[] mergeSort(int[] array) {
+    if (array.length == 1) {
+      return array;
+    }
+
+    int middle = array.length / 2;
+    int[] leftArray = Arrays.copyOfRange(array, 0, middle);
+    int[] rightArray = Arrays.copyOfRange(array, middle, array.length);
+    return merge(mergeSort(leftArray), mergeSort(rightArray));
+  }
+
   private static void swap(int[] array, int i, int j) {
     int temp = array[i];
     array[i] = array[j];
     array[j] = temp;
+  }
+
+  private static int[] merge(int[] left, int[] right) {
+    int result[] = new int[left.length + right.length];
+    int i = 0; // index for the resulting ordered array
+    int j = 0; // index for left array items
+    int k = 0; //  index for right array items
+    while (j < left.length && k < right.length) {
+      if (left[j] < right[k]) {
+        result[i++] = left[j++];
+      } else {
+        result[i++] = right[k++];
+      }
+    }
+
+    // copy the remaining items of array b
+    while (j < left.length) {
+      result[i++] = left[j++];
+    }
+
+    // copy the remaining items of array b
+    while (k < right.length) {
+      result[i++] = right[k++];
+    }
+
+    return result;
   }
 }

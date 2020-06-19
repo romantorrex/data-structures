@@ -36,4 +36,14 @@ public class SortingTest {
     assertThat(Arrays.toString(numbers)).isEqualTo(SORTED_AVERAGE_CASE);
     assertThat(Arrays.toString(worstCase)).isEqualTo(SORTED_WORST_CASE);
   }
+
+  @Test
+  public void mergeSort() {
+    int[] sortedNumbers = Sorting.mergeSort(numbers);
+
+    assertThat(Arrays.toString(sortedNumbers)).isEqualTo(SORTED_AVERAGE_CASE);
+
+    sortedNumbers = Sorting.mergeSort(worstCase);
+    assertThat(Arrays.toString(sortedNumbers)).isEqualTo(SORTED_WORST_CASE);
+  }
 }
