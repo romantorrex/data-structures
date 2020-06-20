@@ -32,6 +32,12 @@ dependencies {
 
 }
 
+test {
+  testLogging {
+    events "passed", "skipped", "failed"
+  }
+}
+
 spotless {
   java {
     googleJavaFormat()
