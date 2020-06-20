@@ -74,4 +74,21 @@ public class BinaryTree {
     preOrderTraversal(node.left, visitedNodes);
     preOrderTraversal(node.right, visitedNodes);
   }
+
+  public List<Integer> postOrderTraversal() {
+
+    ArrayList<Integer> visitedNodes = new ArrayList<>();
+    postOrderTraversal(root, visitedNodes);
+    return visitedNodes;
+  }
+
+  private void postOrderTraversal(TreeNode<Integer> node, List<Integer> visitedNodes) {
+    if (node == null) {
+      return;
+    }
+
+    postOrderTraversal(node.left, visitedNodes);
+    postOrderTraversal(node.right, visitedNodes);
+    visitedNodes.add(node.value);
+  }
 }
