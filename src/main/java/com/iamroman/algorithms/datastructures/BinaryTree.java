@@ -1,7 +1,7 @@
 package com.iamroman.algorithms.datastructures;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 // TODO: Implement method to delete a node.
 // Traversal methods return a list with the node values in the order they were visited
@@ -57,5 +57,21 @@ public class BinaryTree {
     }
 
     return node;
+  }
+
+  public List<Integer> preOrderTraversal() {
+    List<Integer> visitedItems = new ArrayList<>();
+    preOrderTraversal(root, visitedItems);
+    return visitedItems;
+  }
+
+  private void preOrderTraversal(TreeNode<Integer> node, List<Integer> visitedNodes) {
+    if (node == null) {
+      return;
+    }
+
+    visitedNodes.add(node.value);
+    preOrderTraversal(node.left, visitedNodes);
+    preOrderTraversal(node.right, visitedNodes);
   }
 }

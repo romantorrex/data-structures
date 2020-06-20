@@ -46,4 +46,9 @@ public class BinaryTreeTest {
   public void inOrderTraversal() {
     assertThat(tree.inOrderTraversal()).containsExactly(0, 1, 2, 3, 6, 10, 12, 13, 25);
   }
+
+  @Test
+  public void preOrderTraversal() {
+    assertThat(tree.preOrderTraversal()).containsExactly(3, 1, 0, 2, 10, 6, 25, 12, 13);
+  }
 }
