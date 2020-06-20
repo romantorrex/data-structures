@@ -1,6 +1,11 @@
 package com.iamroman.algorithms.datastructures;
 
+import java.util.List;
+import java.util.ArrayList;
+
 // TODO: Implement method to delete a node.
+// Traversal methods return a list with the node values in the order they were visited
+// so they can be unit tested.
 public class BinaryTree {
   private TreeNode<Integer> root;
 
@@ -23,23 +28,21 @@ public class BinaryTree {
     return false;
   }
 
-  public void inOrderTraversal() {
-    inOrderTraversal(root);
+  public List<Integer> inOrderTraversal() {
+    List<Integer> items = new ArrayList<>();
+    inOrderTraversal(root, items);
+
+    return items;
   }
 
-  private void inOrderTraversal(TreeNode<Integer> node) {
-
+  private void inOrderTraversal(TreeNode<Integer> node, List<Integer> items) {
     if (node == null) {
       return;
     }
 
-    inOrderTraversal(node.left);
-    visitNode(node);
-    inOrderTraversal(node.right);
-  }
-
-  public void visitNode(TreeNode<Integer> node) {
-    System.out.println(node.value);
+    inOrderTraversal(node.left, items);
+    items.add(node.value);
+    inOrderTraversal(node.right, items);
   }
 
   private TreeNode<Integer> insert(TreeNode<Integer> node, Integer value) {
