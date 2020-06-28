@@ -1,8 +1,8 @@
 package com.iamroman.algorithms.datastructures;
 
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.Test;
 
 public class PriorityQueueTest {
   PriorityQueue queue = new PriorityQueue();
