@@ -63,6 +63,21 @@ public class Graph {
         .collect(Collectors.joining(", "));
   }
 
+  // TODO: Add unit tests for method depthFirstSearch
+  public void depthFirstSearch(String root) {
+    depthFirstSearch(new Node(root), new HashSet<>());
+  }
+
+  private void depthFirstSearch(Node node, Set<Node> visitedNodes) {
+    visitedNodes.add(node);
+    List<Node> neighbours = adjacencyMap.get(node.label);
+    for (Node neighbour : neighbours) {
+      if (!visitedNodes.contains(neighbour)) {
+        depthFirstSearch(neighbour, visitedNodes);
+      }
+    }
+  }
+
   private class Node {
     private String label;
 
