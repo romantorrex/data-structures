@@ -65,7 +65,33 @@ public class Graph {
 
   // TODO: Add unit tests for method depthFirstSearch
   public void depthFirstSearch(String root) {
+    if (!adjacencyMap.containsKey(root)) {
+      return;
+    }
+
     depthFirstSearch(new Node(root), new HashSet<>());
+  }
+
+  public void breadthFirstSearch(String root) {
+    if (!adjacencyMap.containsKey(root)) {
+      return;
+    }
+
+    Set<Node> visitedNodes = new HashSet<>();
+    Queue<Node> queue = new Queue<>();
+    queue.enqueue(new Node(root));
+    while (queue.size() > 0) {
+      Node current = queue.dequeue();
+      if (visitedNodes.contains(current)) {
+        continue;
+      }
+
+      System.out.println(current);
+      visitedNodes.add(current);
+      adjacencyMap.get(current.label).stream()
+          .filter((neighbour) -> !visitedNodes.contains(neighbour))
+          .forEach(queue::enqueue);
+    }
   }
 
   private void depthFirstSearch(Node node, Set<Node> visitedNodes) {
