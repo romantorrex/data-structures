@@ -20,7 +20,34 @@ public class Heap {
   }
 
   public int remove() {
-    return 0;
+    int rootValue = items[0];
+    items[0] = items[--size];
+
+    bubbleDown();
+
+    return rootValue;
+  }
+
+  private void bubbleDown() {
+    int current = 0;
+    int maxChildIndex = maxChildIndexOf(current);
+    while (maxChildIndex > 0 && items[maxChildIndex] > items[current]) {
+      swap(current, maxChildIndex);
+      current = maxChildIndex;
+      maxChildIndex = maxChildIndexOf(current);
+    }
+  }
+
+  private int maxChildIndexOf(int current) {
+    int leftIndex = current * 2 + 1;
+    int rightIndex = current * 2 + 2;
+
+    if (leftIndex >= size && rightIndex >= size) return -1;
+    if (rightIndex >= size || items[leftIndex] > items[rightIndex]) {
+      return leftIndex;
+    } else {
+      return rightIndex;
+    }
   }
 
   @Override
