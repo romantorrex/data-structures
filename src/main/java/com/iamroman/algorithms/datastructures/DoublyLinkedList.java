@@ -6,16 +6,17 @@ public final class DoublyLinkedList<T> {
   private int size;
 
   public void addLast(T value) {
-    Node<T> node = new Node<>(value);
+    Node<T> newNode = new Node<>(value);
+
     size++;
     if (isEmpty()) {
-      head = tail = node;
+      head = tail = newNode;
       return;
     }
 
-    tail.next = node;
-    node.previous = tail;
-    tail = node;
+    tail.next = newNode;
+    newNode.previous = tail;
+    tail = newNode;
   }
 
   public void addFirst(T value) {
