@@ -75,4 +75,35 @@ public class DoublyLinkedListTest {
     assertThat(list.size()).isEqualTo(2);
     assertThat(list.toString()).isEqualTo("[2, 1]");
   }
+
+  @Test
+  public void removeLast_whenListIsEmpty_throwsException() {
+    Throwable throwable = catchThrowable(() -> list.removeLast());
+
+    assertThat(throwable).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  public void removeLast_whenListHasOneNode() {
+    list.addFirst(10);
+
+    int value = list.removeLast();
+
+    assertThat(value).isEqualTo(10);
+    assertThat(list.size()).isEqualTo(0);
+    assertThat(list.toString()).isEqualTo("[]");
+  }
+
+  @Test
+  public void removeLast_whenListHasManyNodes() {
+    list.addLast(3);
+    list.addLast(2);
+    list.addLast(1);
+
+    int value = list.removeLast();
+
+    assertThat(value).isEqualTo(1);
+    assertThat(list.size()).isEqualTo(2);
+    assertThat(list.toString()).isEqualTo("[3, 2]");
+  }
 }

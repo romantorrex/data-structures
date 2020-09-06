@@ -74,6 +74,23 @@ public final class DoublyLinkedList<T> {
     return removedValue;
   }
 
+  public T removeLast() {
+    if (isEmpty()) {
+      throw new IllegalStateException("List is empty.");
+    }
+
+    T removedValue = tail.value;
+    size--;
+    if (head == tail) {
+      head = tail = null;
+    } else {
+      tail = tail.previous;
+      tail.next = null;
+    }
+
+    return removedValue;
+  }
+
   private class Node<T> {
     private T value;
     Node next;
