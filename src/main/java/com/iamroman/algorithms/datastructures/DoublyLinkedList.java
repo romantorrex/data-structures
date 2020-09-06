@@ -57,6 +57,23 @@ public final class DoublyLinkedList<T> {
     return stringBuilder.toString();
   }
 
+  public T removeFirst() {
+    if (isEmpty()) {
+      throw new IllegalStateException("List is empty.");
+    }
+
+    T removedValue = head.value;
+    size--;
+    if (head == tail) {
+      head = tail = null;
+    } else {
+      head = head.next;
+      head.previous = null;
+    }
+
+    return removedValue;
+  }
+
   private class Node<T> {
     private T value;
     Node next;

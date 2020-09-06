@@ -1,6 +1,7 @@
 package com.iamroman.algorithms.datastructures;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 import org.junit.Test;
 
@@ -42,5 +43,36 @@ public class DoublyLinkedListTest {
     list.addFirst(-1);
     assertThat(list.size()).isEqualTo(3);
     assertThat(list.toString()).isEqualTo("[-1, 0, 1]");
+  }
+
+  @Test
+  public void removeFirst_whenListIsEmpty() {
+    Throwable throwable = catchThrowable(() -> list.removeFirst());
+
+    assertThat(throwable).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  public void removeFirst_whenListHasOneNode() {
+    list.addFirst(10);
+
+    int value = list.removeFirst();
+
+    assertThat(value).isEqualTo(10);
+    assertThat(list.size()).isEqualTo(0);
+    assertThat(list.toString()).isEqualTo("[]");
+  }
+
+  @Test
+  public void removeFirst_whenListHasManyNodes() {
+    list.addLast(3);
+    list.addLast(2);
+    list.addLast(1);
+
+    int value = list.removeFirst();
+
+    assertThat(value).isEqualTo(3);
+    assertThat(list.size()).isEqualTo(2);
+    assertThat(list.toString()).isEqualTo("[2, 1]");
   }
 }
