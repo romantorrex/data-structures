@@ -18,6 +18,20 @@ public final class DoublyLinkedList<T> {
     tail = node;
   }
 
+  public void addFirst(T value) {
+    Node<T> newNode = new Node<>(value);
+
+    size++;
+    if (isEmpty()) {
+      head = tail = newNode;
+      return;
+    }
+
+    newNode.next = head;
+    head.previous = newNode;
+    head = newNode;
+  }
+
   private boolean isEmpty() {
     return head == null && tail == null;
   }

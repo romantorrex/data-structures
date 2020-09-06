@@ -5,12 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 public class DoublyLinkedListTest {
-  DoublyLinkedList<Integer> list;
+  private DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
   @Test
   public void addLast_whenListIsEmpty() {
-    list = new DoublyLinkedList<>();
-
     list.addLast(10);
 
     assertThat(list.size()).isEqualTo(1);
@@ -19,7 +17,6 @@ public class DoublyLinkedListTest {
 
   @Test
   public void addLast_whenListIsNotEmpty() {
-    list = new DoublyLinkedList<>();
     list.addLast(5);
 
     list.addLast(12);
@@ -27,5 +24,23 @@ public class DoublyLinkedListTest {
 
     assertThat(list.size()).isEqualTo(3);
     assertThat(list.toString()).isEqualTo("[5, 12, 0]");
+  }
+
+  @Test
+  public void addFirst_whenListIsEmpty() {
+    list.addFirst(1);
+
+    assertThat(list.size()).isEqualTo(1);
+    assertThat(list.toString()).isEqualTo("[1]");
+  }
+
+  @Test
+  public void addFirst_whenListIsNotEmpty() {
+    list.addFirst(1);
+
+    list.addFirst(0);
+    list.addFirst(-1);
+    assertThat(list.size()).isEqualTo(3);
+    assertThat(list.toString()).isEqualTo("[-1, 0, 1]");
   }
 }
