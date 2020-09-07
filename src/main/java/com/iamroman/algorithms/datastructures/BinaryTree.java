@@ -3,6 +3,8 @@ package com.iamroman.algorithms.datastructures;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.max;
+
 // TODO: Implement method to delete a node.
 // Traversal methods return a list with the node values in the order they were visited
 // so they can be unit tested.
@@ -90,5 +92,17 @@ public class BinaryTree {
     postOrderTraversal(node.left, visitedNodes);
     postOrderTraversal(node.right, visitedNodes);
     visitedNodes.add(node.value);
+  }
+
+  public int height() {
+    return height(root);
+  }
+
+  private int height(TreeNode<Integer> node) {
+    if (node == null || (node.left == null && node.right == null)) {
+      return 0;
+    }
+
+    return 1 + max(height(node.left), height(node.right));
   }
 }
