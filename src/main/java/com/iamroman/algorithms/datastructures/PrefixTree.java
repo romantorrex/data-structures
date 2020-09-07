@@ -19,6 +19,7 @@ public class PrefixTree {
     current.setEndOfWord(true);
   }
 
+  // TODO: Use a hash table for the children.
   private class Node {
     private char value;
     private final Node[] children = new Node[26];
