@@ -1,5 +1,7 @@
 package com.iamroman.algorithms.datastructures;
 
+import static java.lang.Math.max;
+
 public class AVLTree {
   private Node root;
 
@@ -18,13 +20,20 @@ public class AVLTree {
       node.rightChild = insert(node.rightChild, value);
     }
 
+    node.height = 1 + max(heightOf(node.leftChild), heightOf(node.rightChild));
+
     return node;
+  }
+
+  private static int heightOf(Node node) {
+    return (node == null) ? -1 : node.height;
   }
 
   private class Node {
     private Node leftChild;
     private Node rightChild;
     private Integer value;
+    private int height;
 
     Node(Integer value) {
       this.value = value;
