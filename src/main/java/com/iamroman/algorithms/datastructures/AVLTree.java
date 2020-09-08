@@ -25,6 +25,10 @@ public class AVLTree {
     return node;
   }
 
+  private static int balanceFactor(Node node) {
+    return (node == null) ? 0 : heightOf(node.leftChild) - heightOf(node.rightChild);
+  }
+
   private static int heightOf(Node node) {
     return (node == null) ? -1 : node.height;
   }
