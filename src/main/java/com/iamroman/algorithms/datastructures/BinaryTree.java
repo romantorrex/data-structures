@@ -1,5 +1,7 @@
 package com.iamroman.algorithms.datastructures;
 
+import static java.lang.Math.max;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +37,21 @@ public class BinaryTree {
     return items;
   }
 
-  private void inOrderTraversal(TreeNode<Integer> node, List<Integer> items) {
-    if (node == null) {
-      return;
-    }
+  public List<Integer> preOrderTraversal() {
+    List<Integer> visitedItems = new ArrayList<>();
+    preOrderTraversal(root, visitedItems);
+    return visitedItems;
+  }
 
-    inOrderTraversal(node.left, items);
-    items.add(node.value);
-    inOrderTraversal(node.right, items);
+  public List<Integer> postOrderTraversal() {
+
+    ArrayList<Integer> visitedNodes = new ArrayList<>();
+    postOrderTraversal(root, visitedNodes);
+    return visitedNodes;
+  }
+
+  public int height() {
+    return height(root);
   }
 
   private TreeNode<Integer> insert(TreeNode<Integer> node, Integer value) {
@@ -59,10 +68,14 @@ public class BinaryTree {
     return node;
   }
 
-  public List<Integer> preOrderTraversal() {
-    List<Integer> visitedItems = new ArrayList<>();
-    preOrderTraversal(root, visitedItems);
-    return visitedItems;
+  private void inOrderTraversal(TreeNode<Integer> node, List<Integer> items) {
+    if (node == null) {
+      return;
+    }
+
+    inOrderTraversal(node.left, items);
+    items.add(node.value);
+    inOrderTraversal(node.right, items);
   }
 
   private void preOrderTraversal(TreeNode<Integer> node, List<Integer> visitedNodes) {
@@ -75,13 +88,6 @@ public class BinaryTree {
     preOrderTraversal(node.right, visitedNodes);
   }
 
-  public List<Integer> postOrderTraversal() {
-
-    ArrayList<Integer> visitedNodes = new ArrayList<>();
-    postOrderTraversal(root, visitedNodes);
-    return visitedNodes;
-  }
-
   private void postOrderTraversal(TreeNode<Integer> node, List<Integer> visitedNodes) {
     if (node == null) {
       return;
@@ -90,5 +96,13 @@ public class BinaryTree {
     postOrderTraversal(node.left, visitedNodes);
     postOrderTraversal(node.right, visitedNodes);
     visitedNodes.add(node.value);
+  }
+
+  private int height(TreeNode<Integer> node) {
+    if (node == null || (node.left == null && node.right == null)) {
+      return 0;
+    }
+
+    return 1 + max(height(node.left), height(node.right));
   }
 }

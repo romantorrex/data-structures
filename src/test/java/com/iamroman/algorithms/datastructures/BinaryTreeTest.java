@@ -56,4 +56,9 @@ public class BinaryTreeTest {
   public void postOrderTraversal() {
     assertThat(tree.postOrderTraversal()).containsExactly(0, 2, 1, 6, 13, 12, 25, 10, 3);
   }
+
+  @Test
+  public void height() {
+    assertThat(tree.height()).isEqualTo(4);
+  }
 }
