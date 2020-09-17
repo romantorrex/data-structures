@@ -30,6 +30,10 @@ public class BinaryTree {
     return false;
   }
 
+  private boolean isEmpty() {
+    return root == null;
+  }
+
   public List<Integer> inOrderTraversal() {
     List<Integer> items = new ArrayList<>();
     inOrderTraversal(root, items);
@@ -52,6 +56,14 @@ public class BinaryTree {
 
   public int height() {
     return height(root);
+  }
+
+  public int min() {
+    if (isEmpty()) {
+      throw new IllegalStateException("The three does not have any nodes");
+    }
+
+    return min(root);
   }
 
   private TreeNode<Integer> insert(TreeNode<Integer> node, Integer value) {
@@ -104,5 +116,13 @@ public class BinaryTree {
     }
 
     return 1 + max(height(node.left), height(node.right));
+  }
+
+  private static int min(TreeNode<Integer> node) {
+    if (node.left == null) {
+      return node.value;
+    }
+
+    return min(node.left);
   }
 }

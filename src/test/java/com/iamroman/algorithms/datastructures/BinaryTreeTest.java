@@ -1,6 +1,7 @@
 package com.iamroman.algorithms.datastructures;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,5 +61,27 @@ public class BinaryTreeTest {
   @Test
   public void height() {
     assertThat(tree.height()).isEqualTo(4);
+  }
+
+  @Test
+  public void min_success() {
+    assertThat(tree.min()).isEqualTo(0);
+  }
+
+  @Test
+  public void min_whenTreeIsEmpty_throwsException() {
+    BinaryTree tree = new BinaryTree();
+
+    Throwable throwable = catchThrowable(() -> tree.min());
+
+    assertThat(throwable).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  public void min_whenTreeHasASingleNode_success() {
+    BinaryTree tree = new BinaryTree();
+    tree.insert(20);
+
+    assertThat(tree.min()).isEqualTo(20);
   }
 }
