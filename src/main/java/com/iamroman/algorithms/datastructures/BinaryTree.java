@@ -66,6 +66,14 @@ public class BinaryTree {
     return min(root);
   }
 
+  public boolean equals(BinaryTree other) {
+    if (other == null) {
+      return false;
+    }
+
+    return equals(root, other.root);
+  }
+
   private TreeNode<Integer> insert(TreeNode<Integer> node, Integer value) {
     if (node == null) {
       return new TreeNode<Integer>(value);
@@ -124,5 +132,19 @@ public class BinaryTree {
     }
 
     return min(node.left);
+  }
+
+  private static boolean equals(TreeNode<Integer> first, TreeNode<Integer> second) {
+    if (first == null && second == null) {
+      return true;
+    }
+
+    if (first == null || second == null) {
+      return false;
+    }
+
+    return first.value.equals(second.value)
+        && equals(first.left, second.left)
+        && equals(first.right, second.right);
   }
 }

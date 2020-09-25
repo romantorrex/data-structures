@@ -84,4 +84,36 @@ public class BinaryTreeTest {
 
     assertThat(tree.min()).isEqualTo(20);
   }
+
+  @Test
+  public void equals_withNull_returnsFalse() {
+    assertThat(tree.equals(null)).isFalse();
+  }
+
+  @Test
+  public void equals_whenBothTreesAreEqual_returnsTrue() {
+    BinaryTree first = new BinaryTree();
+    first.insert(100);
+    first.insert(150);
+    first.insert(30);
+    BinaryTree second = new BinaryTree();
+    second.insert(100);
+    second.insert(150);
+    second.insert(30);
+
+    System.out.println(first);
+    System.out.println(second);
+
+    assertThat(first.equals(second)).isTrue();
+  }
+
+  @Test
+  public void equals_whenBothTreesAreDifferent_returnsFalse() {
+    BinaryTree other = new BinaryTree();
+    other.insert(100);
+    other.insert(150);
+    other.insert(30);
+
+    assertThat(tree.equals(other)).isFalse();
+  }
 }
