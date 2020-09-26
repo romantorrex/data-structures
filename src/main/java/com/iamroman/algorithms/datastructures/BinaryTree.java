@@ -89,6 +89,12 @@ public class BinaryTree {
     return equals(root, other.root);
   }
 
+  public List<Integer> getNodesAtDistance(int distance) {
+    List<Integer> nodes = new ArrayList<>();
+    getNodesAtDistance(root, distance, nodes);
+    return nodes;
+  }
+
   private TreeNode<Integer> insert(TreeNode<Integer> node, Integer value) {
     if (node == null) {
       return new TreeNode<Integer>(value);
@@ -161,5 +167,17 @@ public class BinaryTree {
     return first.value.equals(second.value)
         && equals(first.left, second.left)
         && equals(first.right, second.right);
+  }
+
+  private static void getNodesAtDistance(
+      TreeNode<Integer> root, int distance, List<Integer> nodes) {
+    if (root == null) return;
+
+    if (distance == 0) {
+      nodes.add(root.value);
+    }
+
+    getNodesAtDistance(root.left, distance - 1, nodes);
+    getNodesAtDistance(root.right, distance - 1, nodes);
   }
 }

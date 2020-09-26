@@ -1,10 +1,13 @@
 package com.iamroman.algorithms.datastructures;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 public class BinaryTreeTest {
   private BinaryTree tree;
@@ -121,5 +124,12 @@ public class BinaryTreeTest {
   @Test
   public void isBinarySearchTree_success() {
     assertThat(BinaryTree.isBinarySearchTree(tree)).isTrue();
+  }
+
+  @Test
+  public void getNodesAtDistance_success() {
+    assertThat(tree.getNodesAtDistance(10)).isEmpty();
+    assertThat(tree.getNodesAtDistance(2)).hasSameElementsAs(asList(0, 2, 6, 25));
+    assertThat(tree.getNodesAtDistance(4)).hasSameElementsAs(asList(13));
   }
 }
