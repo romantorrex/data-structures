@@ -116,4 +116,10 @@ public class BinaryTreeTest {
 
     assertThat(tree.equals(other)).isFalse();
   }
+
+  // TODO: Add negative test for isBinarySearchTree()
+  @Test
+  public void isBinarySearchTree_success() {
+    assertThat(BinaryTree.isBinarySearchTree(tree)).isTrue();
+  }
 }
