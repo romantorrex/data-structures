@@ -7,6 +7,38 @@ public class MaxHeap {
   private int[] items = new int[128];
   private int size = 0;
 
+  public static void heapify(int[] array) {
+    // for (int i = 0; i < array.length; i++) {
+    for (int i = array.length / 2 - 1; i >= 0; i--) {
+      heapify(array, i);
+    }
+  }
+
+  private static void heapify(int[] array, int index) {
+    int maxChildIndex = index;
+
+    int leftChildIndex = index * 2 + 1;
+    if (leftChildIndex < array.length && array[leftChildIndex] > array[maxChildIndex]) {
+      maxChildIndex = leftChildIndex;
+    }
+
+    int rightChildIndex = index * 2 + 2;
+    if (rightChildIndex < array.length && array[rightChildIndex] > array[maxChildIndex]) {
+      maxChildIndex = rightChildIndex;
+    }
+
+    if (index == maxChildIndex) return;
+
+    swap(array, index, maxChildIndex);
+    heapify(array, maxChildIndex);
+  }
+
+  private static void swap(int[] array, int first, int second) {
+    int temp = array[first];
+    array[first] = array[second];
+    array[second] = temp;
+  }
+
   public void insert(int item) {
     items[size++] = item;
     int child = size - 1;

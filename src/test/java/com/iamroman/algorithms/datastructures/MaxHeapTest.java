@@ -36,4 +36,12 @@ public class MaxHeapTest {
     assertThat(maxHeap.remove()).isEqualTo(6);
     assertThat(maxHeap.toString()).isEqualTo("[5, 4, 1]");
   }
+
+  @Test
+  public void heapify_success() {
+    int[] array = {3, 6, 0, 10, 4, 2, 1};
+
+    MaxHeap.heapify(array);
+    assertThat(array).containsExactly(10, 6, 2, 3, 4, 0, 1);
+  }
 }
