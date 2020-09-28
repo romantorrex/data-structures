@@ -3,7 +3,7 @@ package com.iamroman.algorithms.datastructures;
 import java.util.Arrays;
 
 /** Implementation of a binary max heap using an array */
-public class Heap {
+public class MaxHeap {
   private int[] items = new int[128];
   private int size = 0;
 
