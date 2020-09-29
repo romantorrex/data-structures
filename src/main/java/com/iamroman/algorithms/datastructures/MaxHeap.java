@@ -14,6 +14,22 @@ public class MaxHeap {
     }
   }
 
+  public static int getKthLargestElement(int[] array, int k) {
+    if (k > array.length && k < 0) {
+      throw new IllegalArgumentException(
+          String.format("K must be greater or equal to 1 and less equal to %s", array.length));
+    }
+
+    MaxHeap maxHeap = new MaxHeap();
+    for (int element : array) {
+      maxHeap.insert(element);
+    }
+
+    while (k > 1) maxHeap.remove();
+
+    return maxHeap.getMax();
+  }
+
   private static void heapify(int[] array, int index) {
     int maxChildIndex = index;
 
@@ -58,6 +74,10 @@ public class MaxHeap {
     bubbleDown();
 
     return rootValue;
+  }
+
+  public int getMax() {
+    return items[0];
   }
 
   private void bubbleDown() {
