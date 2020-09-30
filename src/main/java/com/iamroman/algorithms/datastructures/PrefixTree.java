@@ -1,4 +1,4 @@
-package com.iamroman.algorithms.datastructues;
+package com.iamroman.algorithms.datastructures;
 
 // TDOD: Add unit tests.
 public class PrefixTree {
@@ -17,6 +17,23 @@ public class PrefixTree {
     }
 
     current.setEndOfWord(true);
+  }
+
+  public boolean contains(String word) {
+    if (word == null) {
+      return false;
+    }
+
+    Node current = root;
+    for (char ch : word.toCharArray()) {
+      if (!current.hasChildWithVallue(ch)) {
+        return false;
+      }
+
+      current = current.getChildWithValue(ch);
+    }
+
+    return current.isEndOfWord();
   }
 
   private class Node {
