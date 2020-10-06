@@ -20,12 +20,13 @@ public class PrefixTree {
   }
 
   public void remove(String word) {
-    remove(root, word, 1);
+    remove(root, word, 0);
   }
 
   private static void remove(Node node, String word, int index) {
     if (index == word.length()) {
       node.setEndOfWord(false);
+      return;
     }
 
     char ch = word.charAt(index);
@@ -113,6 +114,7 @@ public class PrefixTree {
 
     public void removeChild(char ch) {
       children[indexOf(ch)] = null;
+      childrenCount--;
     }
   }
 }

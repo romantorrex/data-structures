@@ -21,4 +21,26 @@ public class PrefixTreeTest {
 
     assertThat(prefixTree.contains(null)).isFalse();
   }
+
+  @Test
+  public void remove_success() {
+    PrefixTree prefixTree = new PrefixTree();
+    prefixTree.insert("car");
+    prefixTree.insert("care");
+
+    prefixTree.remove("car");
+    assertThat(prefixTree.contains("care")).isTrue();
+    assertThat(prefixTree.contains("car")).isFalse();
+  }
+
+  @Test
+  public void remove_whenWordDoesNotExist_success() {
+    PrefixTree prefixTree = new PrefixTree();
+    prefixTree.insert("car");
+    prefixTree.insert("care");
+
+    prefixTree.remove("cat");
+    assertThat(prefixTree.contains("car")).isTrue();
+    assertThat(prefixTree.contains("care")).isTrue();
+  }
 }
