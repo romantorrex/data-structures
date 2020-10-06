@@ -11,6 +11,21 @@ import java.util.List;
 public class BinaryTree {
   private TreeNode<Integer> root;
 
+  public static boolean isBinarySearchTree(BinaryTree tree) {
+
+    return isBinarySearchTree(tree.root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+  }
+
+  private static boolean isBinarySearchTree(TreeNode<Integer> root, int min, int max) {
+
+    if (root == null) return true;
+
+    if (root.value < min || root.value > max) return false;
+
+    return isBinarySearchTree(root.left, min, root.value - 1)
+        && isBinarySearchTree(root.right, root.value + 1, max);
+  }
+
   public void insert(Integer value) {
     root = insert(root, value);
   }
@@ -28,6 +43,10 @@ public class BinaryTree {
     }
 
     return false;
+  }
+
+  private boolean isEmpty() {
+    return root == null;
   }
 
   public List<Integer> inOrderTraversal() {
@@ -52,6 +71,28 @@ public class BinaryTree {
 
   public int height() {
     return height(root);
+  }
+
+  public int min() {
+    if (isEmpty()) {
+      throw new IllegalStateException("The three does not have any nodes");
+    }
+
+    return min(root);
+  }
+
+  public boolean equals(BinaryTree other) {
+    if (other == null) {
+      return false;
+    }
+
+    return equals(root, other.root);
+  }
+
+  public List<Integer> getNodesAtDistance(int distance) {
+    List<Integer> nodes = new ArrayList<>();
+    getNodesAtDistance(root, distance, nodes);
+    return nodes;
   }
 
   private TreeNode<Integer> insert(TreeNode<Integer> node, Integer value) {
@@ -104,5 +145,39 @@ public class BinaryTree {
     }
 
     return 1 + max(height(node.left), height(node.right));
+  }
+
+  private static int min(TreeNode<Integer> node) {
+    if (node.left == null) {
+      return node.value;
+    }
+
+    return min(node.left);
+  }
+
+  private static boolean equals(TreeNode<Integer> first, TreeNode<Integer> second) {
+    if (first == null && second == null) {
+      return true;
+    }
+
+    if (first == null || second == null) {
+      return false;
+    }
+
+    return first.value.equals(second.value)
+        && equals(first.left, second.left)
+        && equals(first.right, second.right);
+  }
+
+  private static void getNodesAtDistance(
+      TreeNode<Integer> root, int distance, List<Integer> nodes) {
+    if (root == null) return;
+
+    if (distance == 0) {
+      nodes.add(root.value);
+    }
+
+    getNodesAtDistance(root.left, distance - 1, nodes);
+    getNodesAtDistance(root.right, distance - 1, nodes);
   }
 }
