@@ -19,11 +19,33 @@ public class PrefixTree {
     current.setEndOfWord(true);
   }
 
+  public void remove(String word) {
+    remove(root, word, 1);
+  }
+
+  private static void remove(Node node, String word, int index) {
+    if (index == word.length()) {
+      node.setEndOfWord(false);
+    }
+
+    char ch = word.charAt(index);
+    Node child = node.getChildWithValue(ch);
+    if (child == null) {
+      return;
+    }
+    remove(child, word, index + 1);
+
+    if (!child.hasChildren() && !child.isEndOfWord()) {
+      node.removeChild(ch);
+    }
+  }
+
   // TODO: Use a hash table for the children.
   private class Node {
     private char value;
     private final Node[] children = new Node[26];
     private boolean endOfWord;
+    private int childrenCount;
 
     public Node(char value) {
       this.value = value;
@@ -56,6 +78,7 @@ public class PrefixTree {
 
     public void addChild(Node child) {
       children[indexOf(child.getValue())] = child;
+      childrenCount++;
     }
 
     @Override
@@ -65,6 +88,14 @@ public class PrefixTree {
 
     private int indexOf(char letter) {
       return letter - 'a';
+    }
+
+    public boolean hasChildren() {
+      return childrenCount > 0;
+    }
+
+    public void removeChild(char ch) {
+      children[indexOf(ch)] = null;
     }
   }
 }
