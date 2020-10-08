@@ -1,6 +1,12 @@
 package com.iamroman.algorithms.datastructures;
 
-// TDOD: Add unit tests.
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class PrefixTree {
   private Node root = new Node(' ');
 
@@ -59,6 +65,39 @@ public class PrefixTree {
     return current.isEndOfWord();
   }
 
+  public List<String> findWords(String prefix) {
+    List<String> words = new ArrayList<>();
+    Node lastNode = findLastNodeOf(prefix);
+    findWords(lastNode, prefix, words);
+    return words;
+  }
+
+  private Node findLastNodeOf(String prefix) {
+    Node current = root;
+    for (char ch : prefix.toCharArray()) {
+      if (!current.hasChildWithVallue(ch)) {
+        return null;
+      }
+
+      current = current.getChildWithValue(ch);
+    }
+    return current;
+  }
+
+  private static void findWords(Node node, String prefix, List<String> words) {
+    if (node == null) {
+      return;
+    }
+
+    if (node.isEndOfWord()) {
+      words.add(prefix);
+    }
+
+    for (Node child : node.getChildren()) {
+      findWords(child, prefix + child.getValue(), words);
+    }
+  }
+
   private class Node {
     private char value;
     private final Node[] children = new Node[26];
@@ -73,8 +112,8 @@ public class PrefixTree {
       return value;
     }
 
-    public Node[] getChildren() {
-      return children;
+    public List<Node> getChildren() {
+      return asList(children).stream().filter(n -> n != null).collect(toList());
     }
 
     public boolean isEndOfWord() {
