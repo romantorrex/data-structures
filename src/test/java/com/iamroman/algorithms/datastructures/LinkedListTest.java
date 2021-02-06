@@ -9,11 +9,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class LinkedListTest {
-  private LinkedList list;
+  private LinkedList<String> list;
 
   @Before
   public void setUp() {
-    list = new LinkedList();
+    list = new LinkedList<>();
   }
 
   @Test
