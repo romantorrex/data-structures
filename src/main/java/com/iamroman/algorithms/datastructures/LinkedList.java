@@ -1,10 +1,16 @@
 package com.iamroman.algorithms.datastructures;
 
 // TODO: Add methods addLast(), addFirst, removeLast(), removeFirst()
+/**
+ * A sequence of nodes in which each node has a reference to the next node in the list.
+ *
+ * <p>Each node can hold data of type {@code T}.
+ */
 public class LinkedList<T> {
   private Node<T> first;
   private int size = 0;
 
+  /** Adds {@code element} to the end of this list. */
   public void add(T element) {
     Node<T> node = new Node<>(element);
     size++;
@@ -20,6 +26,10 @@ public class LinkedList<T> {
     current.next = node;
   }
 
+  /**
+   * Returns the position of the {@code element} in this list or {@code -1} if the list does not
+   * contain the element.
+   */
   public int indexOf(T element) {
     int index = 0;
     Node<T> current = first;
@@ -34,6 +44,7 @@ public class LinkedList<T> {
     return -1;
   }
 
+  /** Deletes all the occurrences of the given {@code element} from this list. */
   public void delete(T element) {
     while (first != null && element.equals(first.data)) {
       first = first.next;
@@ -53,6 +64,7 @@ public class LinkedList<T> {
     }
   }
 
+  /** Returns the number of elements in this list. */
   public int size() {
     return size;
   }
