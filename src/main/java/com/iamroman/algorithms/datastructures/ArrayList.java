@@ -3,9 +3,7 @@ package com.iamroman.algorithms.datastructures;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-/**
- * An implementation of a dynamic array of strings.
- */
+/** An implementation of a dynamic array of strings. */
 public final class ArrayList {
 
   private String[] elements;
@@ -16,16 +14,12 @@ public final class ArrayList {
     count = 0;
   }
 
-  /**
-   * Creates an {@code ArrayList} with the given {@code initialCapacity}.
-   */
+  /** Creates an {@code ArrayList} with the given {@code initialCapacity}. */
   public static ArrayList withCapacity(int initialCapacity) {
     return new ArrayList(initialCapacity);
   }
 
-  /**
-   * Returns the current size of this array.
-   */
+  /** Returns the current size of this array. */
   public int size() {
     return count;
   }
@@ -33,8 +27,7 @@ public final class ArrayList {
   /**
    * Adds the {@code element} at the end of this array.
    *
-   * <p> If the array is full, a new array is created with twice the length of the previous
-   * array.
+   * <p>If the array is full, a new array is created with twice the length of the previous array.
    */
   public void insert(String element) {
     if (count == elements.length) {
@@ -63,7 +56,7 @@ public final class ArrayList {
    * Removes the element located at the given {@code index} in this array.
    *
    * @throws IllegalArgumentException if the index is less than zero or greater that the current
-   *                                  size of this array.
+   *     size of this array.
    */
   public String removeAt(int index) {
     if (index < 0 || index >= count) {
@@ -80,9 +73,7 @@ public final class ArrayList {
     return element;
   }
 
-  /**
-   * Returns the size of the longest string in this array.
-   */
+  /** Returns the size of the longest string in this array. */
   public int maximum() {
     if (size() <= 0) {
       throw new IllegalStateException("Array is empty");
@@ -99,9 +90,7 @@ public final class ArrayList {
     return max;
   }
 
-  /**
-   * Reverses the order of the elements contained in this array.
-   */
+  /** Reverses the order of the elements contained in this array. */
   public void reverse() {
     for (int i = 0, j = count - 1; i < j; i++, j--) {
       String tempValue = elements[i];

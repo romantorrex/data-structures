@@ -6,7 +6,6 @@ import static java.util.stream.Collectors.toList;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class PrefixTree {
   private Node root = new Node(' ');
 
