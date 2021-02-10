@@ -5,11 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/** Implementation of a hash table using chaining for handling collisions */
+/**
+ * A data structure that maps a {@code String} key to an {@code Integer} value.
+ *
+ * <p>Collisions are handled via chaining.
+ */
 public class HashTable {
   private List<Entry>[] buckets = new List[10];
   private int count = 0;
 
+  /** Maps the given {@code key} to the given {@code value} in this hash table. */
   public void put(String key, Integer value) {
     List<Entry> bucket = getBucket(key);
     Entry entry = find(key, bucket);
@@ -22,6 +27,10 @@ public class HashTable {
     }
   }
 
+  /**
+   * Returns the value mapped to the given {@code key}, or null if the key is not mapped to any
+   * value in this hash table.
+   */
   public Integer get(String key) {
     List<Entry> bucket = getBucket(key);
     Entry entry = find(key, bucket);
@@ -33,12 +42,12 @@ public class HashTable {
     return entry.value;
   }
 
+  /** Returns the number of keys in this hash table. */
   public int size() {
     return count;
   }
 
   // TODO: Add implementation for removing a key-value pair.
-
   @Override
   public String toString() {
     String items =
@@ -88,6 +97,7 @@ public class HashTable {
       return this.key;
     }
 
+    @Override
     public String toString() {
       return String.format("{%s:%s}", key, value);
     }
