@@ -2,18 +2,23 @@ package com.iamroman.algorithms.datastructures;
 
 import java.util.Arrays;
 
-/** Implementation of a binary max heap using an array */
+/**
+ * A complete binary tree in which every node's value is greater that the values of its descendants.
+ *
+ * <p>This implementation uses and array for storing the elements.
+ */
 public class MaxHeap {
   private int[] items = new int[128];
   private int size = 0;
 
+  /** Converts the given {@code array} into a Max Heap. */
   public static void heapify(int[] array) {
-    // for (int i = 0; i < array.length; i++) {
     for (int i = array.length / 2 - 1; i >= 0; i--) {
       heapify(array, i);
     }
   }
 
+  /** Returns the position of the k-th largest value in the given {@code array}. */
   public static int getKthLargestElement(int[] array, int k) {
     if (k > array.length && k < 0) {
       throw new IllegalArgumentException(
@@ -30,33 +35,9 @@ public class MaxHeap {
     return maxHeap.getMax();
   }
 
-  private static void heapify(int[] array, int index) {
-    int maxChildIndex = index;
-
-    int leftChildIndex = index * 2 + 1;
-    if (leftChildIndex < array.length && array[leftChildIndex] > array[maxChildIndex]) {
-      maxChildIndex = leftChildIndex;
-    }
-
-    int rightChildIndex = index * 2 + 2;
-    if (rightChildIndex < array.length && array[rightChildIndex] > array[maxChildIndex]) {
-      maxChildIndex = rightChildIndex;
-    }
-
-    if (index == maxChildIndex) return;
-
-    swap(array, index, maxChildIndex);
-    heapify(array, maxChildIndex);
-  }
-
-  private static void swap(int[] array, int first, int second) {
-    int temp = array[first];
-    array[first] = array[second];
-    array[second] = temp;
-  }
-
-  public void insert(int item) {
-    items[size++] = item;
+  /** Adds a node with the given {@code value} to this max heap. */
+  public void insert(int value) {
+    items[size++] = value;
     int child = size - 1;
     int parent = (child - 1) / 2;
 
@@ -67,6 +48,7 @@ public class MaxHeap {
     }
   }
 
+  /** Removes the node with the maximum value from this max heap. */
   public int remove() {
     int rootValue = items[0];
     items[0] = items[--size];
@@ -76,8 +58,14 @@ public class MaxHeap {
     return rootValue;
   }
 
+  /** Returns the max value in this heap. */
   public int getMax() {
     return items[0];
+  }
+
+  @Override
+  public String toString() {
+    return Arrays.toString(Arrays.copyOf(items, size));
   }
 
   private void bubbleDown() {
@@ -102,14 +90,34 @@ public class MaxHeap {
     }
   }
 
-  @Override
-  public String toString() {
-    return Arrays.toString(Arrays.copyOf(items, size));
-  }
-
   private void swap(int first, int second) {
     int temp = items[first];
     items[first] = items[second];
     items[second] = temp;
+  }
+
+  private static void swap(int[] array, int first, int second) {
+    int temp = array[first];
+    array[first] = array[second];
+    array[second] = temp;
+  }
+
+  private static void heapify(int[] array, int index) {
+    int maxChildIndex = index;
+
+    int leftChildIndex = index * 2 + 1;
+    if (leftChildIndex < array.length && array[leftChildIndex] > array[maxChildIndex]) {
+      maxChildIndex = leftChildIndex;
+    }
+
+    int rightChildIndex = index * 2 + 2;
+    if (rightChildIndex < array.length && array[rightChildIndex] > array[maxChildIndex]) {
+      maxChildIndex = rightChildIndex;
+    }
+
+    if (index == maxChildIndex) return;
+
+    swap(array, index, maxChildIndex);
+    heapify(array, maxChildIndex);
   }
 }
