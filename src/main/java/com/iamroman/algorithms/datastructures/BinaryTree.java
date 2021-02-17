@@ -81,12 +81,14 @@ public class BinaryTree {
     return min(root);
   }
 
-  public boolean equals(BinaryTree other) {
-    if (other == null) {
+  @SuppressWarnings("EqualsHashCode") // TODO: implement hashcode()
+  @Override
+  public boolean equals(Object other) {
+    if (other == null || !(other instanceof BinaryTree)) {
       return false;
     }
 
-    return equals(root, other.root);
+    return equals(root, ((BinaryTree) other).root);
   }
 
   public List<Integer> getNodesAtDistance(int distance) {

@@ -10,6 +10,7 @@ plugins {
   // Apply the java-library plugin to add support for Java Library
   id 'java-library'
   id 'com.diffplug.gradle.spotless' version '3.28.1'
+  id 'net.ltgt.errorprone' version '1.3.0'
 }
 
 repositories {
@@ -24,11 +25,12 @@ dependencies {
 
   // This dependency is used internally, and not exposed to consumers on their own compile classpath.
   implementation 'com.google.guava:guava:27.0.1-jre'
-
+  implementation 'com.google.errorprone:error_prone_core:2.5.1'
   // Use JUnit test framework
 
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.assertj:assertj-core:3.13.2'
+
 
 }
 
@@ -49,4 +51,6 @@ spotless {
   }
 }
 
-
+tasks.withType(JavaCompile).configureEach {
+  options.errorprone.disableWarningsInGeneratedCode = true
+}

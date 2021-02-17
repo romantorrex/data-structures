@@ -59,7 +59,7 @@ public class WeightedGraph {
     return distances.get(to);
   }
 
-  private class Node {
+  private static class Node {
     private String label;
     private List<Edge> edges = new ArrayList<>();
 
@@ -72,7 +72,8 @@ public class WeightedGraph {
     }
   }
 
-  private class Edge {
+  @SuppressWarnings("unused") // TODO: Solve error prone error.
+  private static class Edge {
     private Node from;
     private Node to;
     private int weight;
@@ -84,7 +85,7 @@ public class WeightedGraph {
     }
   }
 
-  private class NodeEntry {
+  private static class NodeEntry {
     private Node node;
     private int priority;
 

@@ -84,7 +84,7 @@ public class AVLTree {
     return (node == null) ? -1 : node.height;
   }
 
-  private class Node {
+  private static class Node {
     private Node leftChild;
     private Node rightChild;
     private Integer value;

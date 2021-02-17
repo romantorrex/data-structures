@@ -104,7 +104,7 @@ public class Graph {
     }
   }
 
-  private class Node {
+  private static class Node {
     private String label;
 
     Node(String label) {
@@ -119,7 +119,7 @@ public class Graph {
     @Override
     public boolean equals(Object o) {
       if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+      if (o == null || !(o instanceof Node)) return false;
       Node node = (Node) o;
       return Objects.equals(label, node.label);
     }

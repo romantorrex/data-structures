@@ -91,7 +91,7 @@ public final class DoublyLinkedList<T> {
     return removedValue;
   }
 
-  private class Node<T> {
+  private static class Node<T> {
     private T value;
     Node next;
     Node previous;

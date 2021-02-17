@@ -54,7 +54,7 @@ public abstract class LinkedListChallenges {
         b = b.next;
       }
 
-      if (!(a.data.equals(b.data))) {
+      if (!a.data.equals(b.data)) {
         return false;
       }
 

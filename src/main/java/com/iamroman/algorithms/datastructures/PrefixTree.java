@@ -97,7 +97,7 @@ public class PrefixTree {
     }
   }
 
-  private class Node {
+  private static class Node {
     private char value;
     private final Node[] children = new Node[26];
     private boolean endOfWord;
