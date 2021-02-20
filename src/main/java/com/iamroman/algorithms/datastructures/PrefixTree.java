@@ -1,6 +1,11 @@
-package com.iamroman.algorithms.datastructues;
+package com.iamroman.algorithms.datastructures;
 
-// TDOD: Add unit tests.
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class PrefixTree {
   private Node root = new Node(' ');
 
@@ -19,10 +24,84 @@ public class PrefixTree {
     current.setEndOfWord(true);
   }
 
-  private class Node {
+  public void remove(String word) {
+    remove(root, word, 0);
+  }
+
+  private static void remove(Node node, String word, int index) {
+    if (index == word.length()) {
+      node.setEndOfWord(false);
+      return;
+    }
+
+    char ch = word.charAt(index);
+    Node child = node.getChildWithValue(ch);
+    if (child == null) {
+      return;
+    }
+    remove(child, word, index + 1);
+
+    if (!child.hasChildren() && !child.isEndOfWord()) {
+      node.removeChild(ch);
+    }
+  }
+
+  // TODO: Use a hash table for the children.
+  public boolean contains(String word) {
+    if (word == null) {
+      return false;
+    }
+
+    Node current = root;
+    for (char ch : word.toCharArray()) {
+      if (!current.hasChildWithVallue(ch)) {
+        return false;
+      }
+
+      current = current.getChildWithValue(ch);
+    }
+
+    return current.isEndOfWord();
+  }
+
+  public List<String> findWords(String prefix) {
+    List<String> words = new ArrayList<>();
+    Node lastNode = findLastNodeOf(prefix);
+    findWords(lastNode, prefix, words);
+    return words;
+  }
+
+  private Node findLastNodeOf(String prefix) {
+    Node current = root;
+    for (char ch : prefix.toCharArray()) {
+      if (!current.hasChildWithVallue(ch)) {
+        return null;
+      }
+
+      current = current.getChildWithValue(ch);
+    }
+    return current;
+  }
+
+  private static void findWords(Node node, String prefix, List<String> words) {
+    if (node == null) {
+      return;
+    }
+
+    if (node.isEndOfWord()) {
+      words.add(prefix);
+    }
+
+    for (Node child : node.getChildren()) {
+      findWords(child, prefix + child.getValue(), words);
+    }
+  }
+
+  private static class Node {
     private char value;
     private final Node[] children = new Node[26];
     private boolean endOfWord;
+    private int childrenCount;
 
     public Node(char value) {
       this.value = value;
@@ -32,8 +111,8 @@ public class PrefixTree {
       return value;
     }
 
-    public Node[] getChildren() {
-      return children;
+    public List<Node> getChildren() {
+      return asList(children).stream().filter(n -> n != null).collect(toList());
     }
 
     public boolean isEndOfWord() {
@@ -55,6 +134,7 @@ public class PrefixTree {
 
     public void addChild(Node child) {
       children[indexOf(child.getValue())] = child;
+      childrenCount++;
     }
 
     @Override
@@ -64,6 +144,15 @@ public class PrefixTree {
 
     private int indexOf(char letter) {
       return letter - 'a';
+    }
+
+    public boolean hasChildren() {
+      return childrenCount > 0;
+    }
+
+    public void removeChild(char ch) {
+      children[indexOf(ch)] = null;
+      childrenCount--;
     }
   }
 }

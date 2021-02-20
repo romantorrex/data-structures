@@ -1,5 +1,7 @@
 package com.iamroman.algorithms.datastructures;
 
+import static java.lang.Math.max;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,21 @@ import java.util.List;
 // so they can be unit tested.
 public class BinaryTree {
   private TreeNode<Integer> root;
+
+  public static boolean isBinarySearchTree(BinaryTree tree) {
+
+    return isBinarySearchTree(tree.root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+  }
+
+  private static boolean isBinarySearchTree(TreeNode<Integer> root, int min, int max) {
+
+    if (root == null) return true;
+
+    if (root.value < min || root.value > max) return false;
+
+    return isBinarySearchTree(root.left, min, root.value - 1)
+        && isBinarySearchTree(root.right, root.value + 1, max);
+  }
 
   public void insert(Integer value) {
     root = insert(root, value);
@@ -28,6 +45,10 @@ public class BinaryTree {
     return false;
   }
 
+  private boolean isEmpty() {
+    return root == null;
+  }
+
   public List<Integer> inOrderTraversal() {
     List<Integer> items = new ArrayList<>();
     inOrderTraversal(root, items);
@@ -35,14 +56,45 @@ public class BinaryTree {
     return items;
   }
 
-  private void inOrderTraversal(TreeNode<Integer> node, List<Integer> items) {
-    if (node == null) {
-      return;
+  public List<Integer> preOrderTraversal() {
+    List<Integer> visitedItems = new ArrayList<>();
+    preOrderTraversal(root, visitedItems);
+    return visitedItems;
+  }
+
+  public List<Integer> postOrderTraversal() {
+
+    ArrayList<Integer> visitedNodes = new ArrayList<>();
+    postOrderTraversal(root, visitedNodes);
+    return visitedNodes;
+  }
+
+  public int height() {
+    return height(root);
+  }
+
+  public int min() {
+    if (isEmpty()) {
+      throw new IllegalStateException("The three does not have any nodes");
     }
 
-    inOrderTraversal(node.left, items);
-    items.add(node.value);
-    inOrderTraversal(node.right, items);
+    return min(root);
+  }
+
+  @SuppressWarnings("EqualsHashCode") // TODO: implement hashcode()
+  @Override
+  public boolean equals(Object other) {
+    if (other == null || !(other instanceof BinaryTree)) {
+      return false;
+    }
+
+    return equals(root, ((BinaryTree) other).root);
+  }
+
+  public List<Integer> getNodesAtDistance(int distance) {
+    List<Integer> nodes = new ArrayList<>();
+    getNodesAtDistance(root, distance, nodes);
+    return nodes;
   }
 
   private TreeNode<Integer> insert(TreeNode<Integer> node, Integer value) {
@@ -59,10 +111,14 @@ public class BinaryTree {
     return node;
   }
 
-  public List<Integer> preOrderTraversal() {
-    List<Integer> visitedItems = new ArrayList<>();
-    preOrderTraversal(root, visitedItems);
-    return visitedItems;
+  private void inOrderTraversal(TreeNode<Integer> node, List<Integer> items) {
+    if (node == null) {
+      return;
+    }
+
+    inOrderTraversal(node.left, items);
+    items.add(node.value);
+    inOrderTraversal(node.right, items);
   }
 
   private void preOrderTraversal(TreeNode<Integer> node, List<Integer> visitedNodes) {
@@ -75,13 +131,6 @@ public class BinaryTree {
     preOrderTraversal(node.right, visitedNodes);
   }
 
-  public List<Integer> postOrderTraversal() {
-
-    ArrayList<Integer> visitedNodes = new ArrayList<>();
-    postOrderTraversal(root, visitedNodes);
-    return visitedNodes;
-  }
-
   private void postOrderTraversal(TreeNode<Integer> node, List<Integer> visitedNodes) {
     if (node == null) {
       return;
@@ -90,5 +139,47 @@ public class BinaryTree {
     postOrderTraversal(node.left, visitedNodes);
     postOrderTraversal(node.right, visitedNodes);
     visitedNodes.add(node.value);
+  }
+
+  private int height(TreeNode<Integer> node) {
+    if (node == null || (node.left == null && node.right == null)) {
+      return 0;
+    }
+
+    return 1 + max(height(node.left), height(node.right));
+  }
+
+  private static int min(TreeNode<Integer> node) {
+    if (node.left == null) {
+      return node.value;
+    }
+
+    return min(node.left);
+  }
+
+  private static boolean equals(TreeNode<Integer> first, TreeNode<Integer> second) {
+    if (first == null && second == null) {
+      return true;
+    }
+
+    if (first == null || second == null) {
+      return false;
+    }
+
+    return first.value.equals(second.value)
+        && equals(first.left, second.left)
+        && equals(first.right, second.right);
+  }
+
+  private static void getNodesAtDistance(
+      TreeNode<Integer> root, int distance, List<Integer> nodes) {
+    if (root == null) return;
+
+    if (distance == 0) {
+      nodes.add(root.value);
+    }
+
+    getNodesAtDistance(root.left, distance - 1, nodes);
+    getNodesAtDistance(root.right, distance - 1, nodes);
   }
 }

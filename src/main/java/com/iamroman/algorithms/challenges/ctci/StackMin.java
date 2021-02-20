@@ -20,7 +20,7 @@ public final class StackMin {
   }
 
   public int pop() {
-    if (dataStack.peek() == minsStack.peek()) {
+    if (dataStack.peek().equals(minsStack.peek())) {
       minsStack.pop();
     }
 

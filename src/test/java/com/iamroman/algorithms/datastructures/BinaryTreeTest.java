@@ -1,6 +1,8 @@
 package com.iamroman.algorithms.datastructures;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,5 +57,77 @@ public class BinaryTreeTest {
   @Test
   public void postOrderTraversal() {
     assertThat(tree.postOrderTraversal()).containsExactly(0, 2, 1, 6, 13, 12, 25, 10, 3);
+  }
+
+  @Test
+  public void height() {
+    assertThat(tree.height()).isEqualTo(4);
+  }
+
+  @Test
+  public void min_success() {
+    assertThat(tree.min()).isEqualTo(0);
+  }
+
+  @Test
+  public void min_whenTreeIsEmpty_throwsException() {
+    BinaryTree tree = new BinaryTree();
+
+    Throwable throwable = catchThrowable(() -> tree.min());
+
+    assertThat(throwable).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  public void min_whenTreeHasASingleNode_success() {
+    BinaryTree tree = new BinaryTree();
+    tree.insert(20);
+
+    assertThat(tree.min()).isEqualTo(20);
+  }
+
+  @Test
+  public void equals_withNull_returnsFalse() {
+    assertThat(tree.equals(null)).isFalse();
+  }
+
+  @Test
+  public void equals_whenBothTreesAreEqual_returnsTrue() {
+    BinaryTree first = new BinaryTree();
+    first.insert(100);
+    first.insert(150);
+    first.insert(30);
+    BinaryTree second = new BinaryTree();
+    second.insert(100);
+    second.insert(150);
+    second.insert(30);
+
+    System.out.println(first);
+    System.out.println(second);
+
+    assertThat(first.equals(second)).isTrue();
+  }
+
+  @Test
+  public void equals_whenBothTreesAreDifferent_returnsFalse() {
+    BinaryTree other = new BinaryTree();
+    other.insert(100);
+    other.insert(150);
+    other.insert(30);
+
+    assertThat(tree.equals(other)).isFalse();
+  }
+
+  // TODO: Add negative test for isBinarySearchTree()
+  @Test
+  public void isBinarySearchTree_success() {
+    assertThat(BinaryTree.isBinarySearchTree(tree)).isTrue();
+  }
+
+  @Test
+  public void getNodesAtDistance_success() {
+    assertThat(tree.getNodesAtDistance(10)).isEmpty();
+    assertThat(tree.getNodesAtDistance(2)).hasSameElementsAs(asList(0, 2, 6, 25));
+    assertThat(tree.getNodesAtDistance(4)).hasSameElementsAs(asList(13));
   }
 }

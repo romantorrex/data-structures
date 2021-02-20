@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 import java.util.NoSuchElementException;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /** List implementation with an aarray. */
@@ -141,5 +142,16 @@ public class ArrayListTest {
 
     array.reverse();
     assertThat(array.toString()).isEqualTo("[one]");
+  }
+
+  // TODO: Fix failing unit test.
+  @Test
+  @Disabled
+  public void getKthLargestElement_success() {
+    int[] numbers = {6, 2, 0, 15, 4, 20, 13};
+
+    assertThat(MaxHeap.getKthLargestElement(numbers, 2)).isEqualTo(15);
+    assertThat(MaxHeap.getKthLargestElement(numbers, 1)).isEqualTo(20);
+    assertThat(MaxHeap.getKthLargestElement(numbers, 4)).isEqualTo(10);
   }
 }

@@ -1,31 +1,40 @@
 package com.iamroman.algorithms.datastructures;
 
 // TODO: Add methods addLast(), addFirst, removeLast(), removeFirst()
-public class LinkedList {
-  private Node<String> first;
+/**
+ * A sequence of nodes in which each node has a reference to the next node in the list.
+ *
+ * <p>Each node can hold data of type {@code T}.
+ */
+public class LinkedList<T> {
+  private Node<T> first;
   private int size = 0;
 
-  public void add(String data) {
-    Node<String> node = new Node<>(data);
+  /** Adds {@code element} to the end of this list. */
+  public void add(T element) {
+    Node<T> node = new Node<>(element);
     size++;
     if (first == null) {
       first = node;
       return;
     }
 
-    Node<String> current = first;
+    Node<T> current = first;
     while (current.next != null) {
       current = current.next;
     }
-
     current.next = node;
   }
 
-  public int indexOf(String data) {
+  /**
+   * Returns the position of the {@code element} in this list or {@code -1} if the list does not
+   * contain the element.
+   */
+  public int indexOf(T element) {
     int index = 0;
-    Node<String> current = first;
+    Node<T> current = first;
     while (current != null) {
-      if (data.equals(current.data)) {
+      if (element.equals(current.data)) {
         return index;
       }
       index++;
@@ -35,17 +44,17 @@ public class LinkedList {
     return -1;
   }
 
-  public void delete(String data) {
-
-    while (first != null && data.equals(first.data)) {
+  /** Deletes all the occurrences of the given {@code element} from this list. */
+  public void delete(T element) {
+    while (first != null && element.equals(first.data)) {
       first = first.next;
       size--;
     }
 
-    Node<String> previous = first;
-    Node<String> current = first;
+    Node<T> previous = first;
+    Node<T> current = first;
     while (current != null) {
-      if (data.equals(current.data)) {
+      if (element.equals(current.data)) {
         previous.next = current.next;
         size--;
       } else {
@@ -55,6 +64,7 @@ public class LinkedList {
     }
   }
 
+  /** Returns the number of elements in this list. */
   public int size() {
     return size;
   }
