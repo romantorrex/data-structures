@@ -2,13 +2,15 @@ package com.iamroman.algorithms.datastructures;
 
 import java.util.NoSuchElementException;
 
-public class Queue<T> {
+/** A data structure in which elements are inserted in the back and removed from the front. */
+public final class Queue<T> {
   private Node<T> front;
   private Node<T> back;
   private int count;
 
-  public void enqueue(T data) {
-    Node<T> newNode = new Node<>(data);
+  /** Inserts an element in the back of this queue. */
+  public void enqueue(T element) {
+    Node<T> newNode = new Node<>(element);
     count++;
     if (front == null) {
       front = newNode;
@@ -20,6 +22,7 @@ public class Queue<T> {
     back = newNode;
   }
 
+  /** Removes the first element in the front of this queue. */
   public T dequeue() {
     checkEmpty();
     Node<T> firstNode = front;
@@ -35,11 +38,17 @@ public class Queue<T> {
     return firstNode.data;
   }
 
+  /**
+   * Returns the first element in the front of this queue.
+   *
+   * <p>The element returned is not removed.
+   */
   public T peek() {
     checkEmpty();
     return front.data;
   }
 
+  /** Returns the number of elements in this queue. */
   public int size() {
     return count;
   }
