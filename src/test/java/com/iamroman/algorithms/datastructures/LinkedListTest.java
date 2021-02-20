@@ -4,14 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.NoSuchElementException;
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class LinkedListTest {
   private LinkedList list;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     list = new LinkedList();
   }
@@ -104,7 +104,7 @@ public class LinkedListTest {
   }
 
   @Test
-  @Ignore // TODO: define the correct behaviour when the element to be deleted does not exist.
+  @Disabled // TODO: define the correct behaviour when the element to be deleted does not exist.
   public void delete_nonExistent_throwsException() {
     list.add("1");
     list.add("10");

@@ -2,13 +2,13 @@ package com.iamroman.algorithms.datastructures;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class HashTableTest {
   private HashTable hashTable;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     hashTable = new HashTable();
   }

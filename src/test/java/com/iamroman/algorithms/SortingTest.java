@@ -3,8 +3,8 @@ package com.iamroman.algorithms;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SortingTest {
   private static String SORTED_AVERAGE_CASE = "[0, 2, 5, 6, 7]";
@@ -13,7 +13,7 @@ public class SortingTest {
   private int[] numbers;
   private int[] worstCase;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     numbers = new int[] {5, 2, 7, 6, 0};
     worstCase = new int[] {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};

@@ -2,14 +2,14 @@ package com.iamroman.algorithms.datastructures;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BinaryTreeTest {
   private BinaryTree tree;
 
   // creates a tree that is used to test traversal methods
-  @Before
+  @BeforeEach
   public void setUp() {
     tree = new BinaryTree();
 

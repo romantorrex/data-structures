@@ -2,14 +2,14 @@ package com.iamroman.algorithms.datastructures;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class HeapTest {
 
   private Heap heap;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     heap = new Heap();
     heap.insert(6);

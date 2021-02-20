@@ -2,10 +2,10 @@ package com.iamroman.algorithms.challenges.ctci;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TwoStackQueueTest {
-  private TwoStackQueue<String> queue = new TwoStackQueue();;
+  private TwoStackQueue<String> queue = new TwoStackQueue();
 
   @Test
   public void enqueue() {

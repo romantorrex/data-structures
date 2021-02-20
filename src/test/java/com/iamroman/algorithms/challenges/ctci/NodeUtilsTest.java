@@ -3,7 +3,7 @@ package com.iamroman.algorithms.challenges.ctci;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.iamroman.algorithms.challenges.ctci.LinkedListChallenges.Node;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class NodeUtilsTest {
 
