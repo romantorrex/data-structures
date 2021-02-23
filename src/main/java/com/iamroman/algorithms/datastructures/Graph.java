@@ -4,14 +4,25 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-/** A directed graph implementation using an adjacency list. */
-public class Graph {
+/**
+ * A data structure that consist of a set of nodes and connections/relationships between some of
+ * them.
+ *
+ * <p>This is an implementation of a directed graph using and adjacency list.
+ */
+public final class Graph {
   private final Map<String, List<Node>> adjacencyMap = new HashMap<>();
 
+  /** Adds a new node with the given {@code label} to this graph. */
   public void addNode(String label) {
     adjacencyMap.putIfAbsent(label, new ArrayList<>());
   }
 
+  /**
+   * Adds an edge that connects node {@code from} with node {@code to}.
+   *
+   * @throws IllegalArgumentException if either node from or node to do not exist in this graph.
+   */
   public void addEdge(String from, String to) {
     if (!adjacencyMap.containsKey(from)) {
       throw new IllegalArgumentException(
@@ -26,6 +37,7 @@ public class Graph {
     adjacencyMap.get(from).add(new Node(to));
   }
 
+  /** Removes the node that has the given {@code label} from this graph. */
   public void removeNode(String label) {
     if (!adjacencyMap.containsKey(label)) {
       throw new IllegalArgumentException(
@@ -37,11 +49,17 @@ public class Graph {
     adjacencyMap.remove(label);
   }
 
+  /**
+   * Removes the edge that connects node {@code from} with node {@code to}, from this graph.
+   *
+   * @throws IllegalArgumentException if either node from or node to do not exist in this graph.
+   */
   public void removeEdge(String from, String to) {
     if (!adjacencyMap.containsKey(from)) {
       throw new IllegalArgumentException(
           String.format("Node %s does not exist in this graph.", from));
     }
+
     if (!adjacencyMap.containsKey(to)) {
       throw new IllegalArgumentException(
           String.format("Node %s does not exist in this graph.", to));
@@ -64,6 +82,7 @@ public class Graph {
   }
 
   // TODO: Add unit tests for method depthFirstSearch
+  /** Implements the depth-first algorithm to traverse this graph. */
   public void depthFirstSearch(String root) {
     if (!adjacencyMap.containsKey(root)) {
       return;
@@ -72,6 +91,7 @@ public class Graph {
     depthFirstSearch(new Node(root), new HashSet<>());
   }
 
+  /** Implements the breath-first algorithm to traverse this graph. */
   public void breadthFirstSearch(String root) {
     if (!adjacencyMap.containsKey(root)) {
       return;

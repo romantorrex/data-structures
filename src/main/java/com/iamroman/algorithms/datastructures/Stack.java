@@ -2,34 +2,42 @@ package com.iamroman.algorithms.datastructures;
 
 import java.util.NoSuchElementException;
 
-public class Stack<T> {
+/**
+ * A data structure in which elements are added to the top of the stack and only the element at the
+ * top can be removed.
+ */
+public final class Stack<T> {
   private Node<T> top;
-  int count = 0;
+  private int count = 0;
 
-  public void push(T data) {
-    Node<T> newNode = new Node<>(data);
+  /** Inserts the given {@code element} at the top of this stack. */
+  public void push(T element) {
+    Node<T> newNode = new Node<>(element);
 
     newNode.next = top;
     top = newNode;
     count++;
   }
 
+  /** Removes the element that is in the top of this stack. */
   public T pop() {
     checkEmpty();
 
-    T deletedData = top.data;
+    T removedElement = top.data;
     top = top.next;
     count--;
 
-    return deletedData;
+    return removedElement;
   }
 
+  /** Returns the element that is in the top of this stack. */
   public T peek() {
     checkEmpty();
 
     return top.data;
   }
 
+  /** Returns the number of elements in this stack. */
   public int size() {
     return count;
   }
