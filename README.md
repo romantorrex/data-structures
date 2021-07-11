@@ -24,3 +24,14 @@ found in interview preparation books/sites.
 * Java 11
 * Gradle
 * JUnit & Assertj
+
+### Run
+All unit test can be executed with:
+```
+./gradlew test
+```
+
+Source code can be formatted with:
+```
+./gradlew :spotlessApply
+```
