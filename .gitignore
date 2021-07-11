@@ -8,3 +8,5 @@ build
 .idea
 stale_outputs_checked
 
+# OS
+.DS_Store
