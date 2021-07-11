@@ -68,4 +68,22 @@ public class LinkedList<T> {
   public int size() {
     return size;
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder("[");
+    Node<T> current = first;
+
+    while (current != null) {
+      sb.append(current.data + ", ");
+      current = current.next;
+    }
+
+    // if the list has elements its necessary to remove the trailing  ", ".
+    if (sb.length() > 2) sb.delete(sb.length() - 2, sb.length());
+
+    sb.append("]");
+
+    return sb.toString();
+  }
 }

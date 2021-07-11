@@ -114,4 +114,18 @@ public class LinkedListTest {
 
     assertThat(thrown).isInstanceOf(NoSuchElementException.class);
   }
+
+  @Test
+  public void toString_success() {
+    list.add("1");
+    list.add("2");
+    list.add("3");
+
+    assertThat(list.toString()).isEqualTo("[1, 2, 3]");
+  }
+
+  @Test
+  public void toString_whenEmpty_success() {
+    assertThat(list.toString()).isEqualTo("[]");
+  }
 }
