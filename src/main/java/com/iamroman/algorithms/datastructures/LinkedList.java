@@ -86,4 +86,21 @@ public class LinkedList<T> {
 
     return sb.toString();
   }
+
+  /** Reverses the elements in this list. */
+  public void reverse() {
+    if (first == null) {
+      return;
+    }
+
+    Node<T> current = first;
+    Node<T> previous = null;
+    while (current != null) {
+      Node<T> next = current.next;
+      current.next = previous;
+      previous = current;
+      current = next;
+    }
+    first = previous;
+  }
 }

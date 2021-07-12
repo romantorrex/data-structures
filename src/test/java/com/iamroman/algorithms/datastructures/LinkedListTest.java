@@ -128,4 +128,33 @@ public class LinkedListTest {
   public void toString_whenEmpty_success() {
     assertThat(list.toString()).isEqualTo("[]");
   }
+
+  @Test
+  public void reverse_whenEmpty_success() {
+    list.reverse();
+
+    assertThat(list.toString()).isEqualTo("[]");
+  }
+
+  @Test
+  public void reverse_singleNode_success() {
+    list.add("1");
+
+    list.reverse();
+
+    assertThat(list.toString()).isEqualTo("[1]");
+  }
+
+  @Test
+  public void reverse_manyNodes_success() {
+    list.add("1");
+    list.add("2");
+    list.add("3");
+    list.add("4");
+    list.add("5");
+
+    list.reverse();
+
+    assertThat(list.toString()).isEqualTo("[5, 4, 3, 2, 1]");
+  }
 }
